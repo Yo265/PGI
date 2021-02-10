@@ -29,7 +29,7 @@ int main() {
     struct BITMAPINFOHEADER inf;
     struct BITMAPINFO header;
     int bmp;
-    char filename[] = ""; //Поменять путь
+    char filename[] = "../Data/1.bmp"; //Поменять путь
     if ((bmp = open(filename, O_RDONLY)) == -1){
         perror("Error while opening file");
         exit(1);
@@ -86,8 +86,8 @@ int main() {
     }
 
     int new_bmp;
-    char new_filename[] = "C:\\Users\\timur\\Desktop\\n.bmp";
-    if ((new_bmp = open(new_filename,  O_CREAT | O_WRONLY)) == -1)
+    char new_filename[] = "../Result/out.bmp";
+    if ((new_bmp = open(new_filename,  O_CREAT | O_WRONLY,0666)) == -1)
         perror("open failed on output file");
     write(new_bmp, &header, sizeof(header));
     write(new_bmp, &inf, sizeof(inf));

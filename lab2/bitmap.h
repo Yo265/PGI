@@ -7,27 +7,27 @@
 
 #pragma pack(push, 2)
 struct BITMAPINFO{
-    unsigned short int bfType;
-    unsigned long int bfSize;
-    unsigned short int bfReserved1;
-    unsigned short int bfReserved2;
-    unsigned long int bfOffBits;
+    u_short bfType;
+    u_int32_t bfSize;
+    u_short bfReserved1;
+    u_short bfReserved2;
+    u_int32_t bfOffBits;
 };
 #pragma pack(pop)
 
 #pragma pack(push, 2)
 struct BITMAPINFOHEADER{
-    unsigned long int biSize;
-    long int biWidth;
-    long int biHeight;
-    unsigned short int biPlanes;
-    unsigned short int biBitCount;
-    unsigned long int biCompression;
-    unsigned long int biSizeImage;
-    long int biXPelsPerMeter;
-    long int biYPelsPerMeter;
-    unsigned long int biClrUsed;
-    unsigned long int biClrImportant;
+    u_int32_t biSize;
+    int32_t biWidth;
+    int32_t biHeight;
+    u_short biPlanes;
+    u_short biBitCount;
+    u_int32_t biCompression;
+    u_int32_t biSizeImage;
+    int32_t biXPelsPerMeter;
+    int32_t biYPelsPerMeter;
+    u_int32_t biClrUsed;
+    u_int32_t biClrImportant;
 };
 #pragma pack(pop)
 
