@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <io.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include "bitmap.h"
 
@@ -30,7 +30,7 @@ int main() {
     struct BITMAPINFO header;
     int bmp;
     char filename[] = "C:\\Users\\timur\\Desktop\\2.bmp";
-    if ((bmp = open(filename, O_RDONLY | O_BINARY)) == -1){
+    if ((bmp = open(filename, O_RDONLY)) == -1){
         perror("Error while opening file");
         exit(1);
     }
@@ -111,7 +111,7 @@ int main() {
 
     int new_bmp;
     char new_filename[] = "C:\\Users\\timur\\Desktop\\b.bmp";
-    if ((new_bmp = open(new_filename,  O_CREAT | O_WRONLY | O_BINARY)) == -1)
+    if ((new_bmp = open(new_filename,  O_CREAT | O_WRONLY)) == -1)
         perror("open failed on output file");
     write(new_bmp, &new_header, sizeof(new_header));
     write(new_bmp, &new_inf, sizeof(new_inf));
