@@ -5,6 +5,14 @@
 #ifndef LAB2_BITMAP_H
 #define LAB2_BITMAP_H
 
+#if defined(_WIN32)
+
+#include <stdint.h>
+
+typedef uint32_t u_int32_t;
+typedef unsigned short u_short;
+
+#endif
 #pragma pack(push, 2)
 struct BITMAPINFO{
     u_short bfType;

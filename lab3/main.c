@@ -6,23 +6,23 @@
 
 void printBMPHeader(struct BITMAPINFO info){
     printf("ID field: %c%c \n", info.bfType & 0xFF, info.bfType >> 8);
-    printf("Size of the BMP file: %lu bytes\n", info.bfSize);
+    printf("Size of the BMP file: %u bytes\n", info.bfSize);
     printf("bfReserved1: %d \n", info.bfReserved1);
     printf("bfReserved2: %d \n", info.bfReserved2);
-    printf("Offset where the pixel array (bitmap data) can be found: %lu bytes \n", info.bfOffBits);
+    printf("Offset where the pixel array (bitmap data) can be found: %u bytes \n", info.bfOffBits);
 }
 
 void printDIBHeader(struct BITMAPINFOHEADER info){
-    printf("Number of bytes in the DIB header (from this point): = %ld bytes\n", info.biSize);
-    printf("Width of the bitmap in pixels: %lu pixels\n", info.biWidth);
-    printf("Height of the bitmap in pixels. Positive for bottom to top pixel order: %ld pixels\n", info.biHeight);
+    printf("Number of bytes in the DIB header (from this point): = %u bytes\n", info.biSize);
+    printf("Width of the bitmap in pixels: %d pixels\n", info.biWidth);
+    printf("Height of the bitmap in pixels. Positive for bottom to top pixel order: %d pixels\n", info.biHeight);
     printf("Number of color planes being used: %d \n", info.biPlanes);
     printf("Number of bits per pixel: %hu bits \n", info.biBitCount);
-    printf("Pixel array compression: %lu \n", info.biCompression);
-    printf("Size of the raw bitmap data (including padding): %lu bytes \n", info.biSizeImage);
-    printf("Print resolution of the image: %ld pixel/metre horizontal %ld pixel/metre vertical \n", info.biXPelsPerMeter, info.biYPelsPerMeter);
-    printf("Number of colors in the palette: %lu \n", info.biClrUsed);
-    printf("Number of important colors: %lu \n", info.biClrImportant);
+    printf("Pixel array compression: %u \n", info.biCompression);
+    printf("Size of the raw bitmap data (including padding): %u bytes \n", info.biSizeImage);
+    printf("Print resolution of the image: %d pixel/metre horizontal %d pixel/metre vertical \n", info.biXPelsPerMeter, info.biYPelsPerMeter);
+    printf("Number of colors in the palette: %u \n", info.biClrUsed);
+    printf("Number of important colors: %u \n", info.biClrImportant);
 }
 
 int main() {
@@ -84,9 +84,9 @@ int main() {
     }
     for(int i = 0; i < height; ++i){
         for(int j = 0; j < width * 3; j += 3){
-                new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3] = buff[(height - i - 1) * (width * 3 + width % 4) + j];
-                new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3 + 1] = buff[(height - i-1) * (width * 3 + width % 4) + j + 1];
-                new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3 + 2] = buff[(height - i -1) * (width * 3 + width % 4) + j + 2];
+            new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3] = buff[(height - i - 1) * (width * 3 + width % 4) + j];
+            new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3 + 1] = buff[(height - i-1) * (width * 3 + width % 4) + j + 1];
+            new_buff[j / 3 * (new_width * 3 + new_width % 4) + i * 3 + 2] = buff[(height - i -1) * (width * 3 + width % 4) + j + 2];
         }
     }
 

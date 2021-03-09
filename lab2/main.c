@@ -20,7 +20,7 @@ void printDIBHeader(struct BITMAPINFOHEADER info){
     printf("Number of bits per pixel: %hu bits \n", info.biBitCount);
     printf("Pixel array compression: %u \n", info.biCompression);
     printf("Size of the raw bitmap data (including padding): %u bytes \n", info.biSizeImage);
-    printf("Print resolution of the image: %d pixel/metre horizontal %ld pixel/metre vertical \n", info.biXPelsPerMeter, info.biYPelsPerMeter);
+    printf("Print resolution of the image: %d pixel/metre horizontal %d pixel/metre vertical \n", info.biXPelsPerMeter, info.biYPelsPerMeter);
     printf("Number of colors in the palette: %u \n", info.biClrUsed);
     printf("Number of important colors: %u \n", info.biClrImportant);
 }
@@ -29,7 +29,7 @@ int main() {
     struct BITMAPINFOHEADER inf;
     struct BITMAPINFO header;
     int bmp;
-    char filename[] = "../Data/1.bmp";
+    char filename[] = "../Data/24bit bmp.bmp";
     if ((bmp = open(filename, O_RDONLY)) == -1){
         perror("Error while opening file");
         exit(1);

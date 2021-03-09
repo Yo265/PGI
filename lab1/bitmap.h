@@ -2,9 +2,17 @@
 // Created by timur on 03.02.2021.
 //
 
-#ifndef LAB2_BITMAP_H
-#define LAB2_BITMAP_H
+#ifndef LAB1_BITMAP_H
+#define LAB1_BITMAP_H
 
+#if defined(_WIN32)
+
+#include <stdint.h>
+
+typedef uint32_t u_int32_t;
+typedef unsigned short u_short;
+
+#endif
 #pragma pack(push, 2)
 struct BITMAPINFO{
     u_short bfType;
@@ -31,4 +39,4 @@ struct BITMAPINFOHEADER{
 };
 #pragma pack(pop)
 
-#endif //LAB2_BITMAP_H
+#endif //LAB1_BITMAP_H
