@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
     struct BITMAPINFOHEADER inf;
     struct BITMAPINFO header;
     int bmp;
-    char filename[] = "../Data/4bit bmp.bmp";
+    char filename[] = "../Data/test1.bmp";
     if ((bmp = open(filename, O_RDONLY)) == -1){
         perror("Error while opening file");
         exit(1);
@@ -73,7 +73,7 @@ int main(int argc, char *argv[]) {
             unsigned long size;
 
             if(inf.biSizeImage == 0){
-                size = width + width % 4;
+                size = width / 2  + width % 4;
                 size *= height;
             }else
                 size = inf.biSizeImage;
@@ -102,28 +102,66 @@ int main(int argc, char *argv[]) {
                 perror("Error while allocate new pixel buffer");
                 exit(1);
             }
-            int k = 0;
-            for(size_t i = 0; i < height; ++i){
+            int k;
+//            for(size_t i = 0; i < height; ++i){
 //                k = 0;
-                if( i == 100)
-                    break;
-                for(size_t j = 0; j < width * 3; j += 6){
-                    unsigned char b = color_table[(buff[k] >> 4) * 4];
-                    unsigned char g = color_table[(buff[k] >> 4) * 4 + 1];
-                    unsigned char r = color_table[(buff[k] >> 4) * 4 + 2];
-                    new_buff[i * (width * 3 + width % 4) + j] = b;
-                    new_buff[i * (width * 3 + width % 4) + j + 1] = g;
-                    new_buff[i * (width * 3 + width % 4) + j + 2] = r;
-                    printf("%d\n", k);
-                    b = color_table[(buff[k] & 0xF) * 4];
-                    g = color_table[(buff[k] & 0xF) * 4 + 1];
-                    r = color_table[(buff[k] & 0xF) * 4 + 2];
-                    new_buff[i * (width * 3 + width % 4) + j + 3] = b;
-                    new_buff[i * (width * 3 + width % 4) + j + 4] = g;
-                    new_buff[i * (width * 3 + width % 4) + j + 5] = r;
+//                for(size_t j = 0; j < width * 3 + width % 4; j += 6){
+//                    unsigned char b = color_table[(buff[k] >> 4) * 4];
+//                    unsigned char g = color_table[(buff[k] >> 4) * 4 + 1];
+//                    unsigned char r = color_table[(buff[k] >> 4) * 4 + 2];
+//                    if(r == 0 && g == 0 && b == 0) printf("OK\n");
+//                    new_buff[i * (width * 3) + j] = b;
+//                    new_buff[i * (width * 3) + j + 1] = g;
+//                    new_buff[i * (width * 3) + j + 2] = r;
+//                    b = color_table[(buff[k] & 0xF) * 4];
+//                    g = color_table[(buff[k] & 0xF) * 4 + 1];
+//                    r = color_table[(buff[k] & 0xF) * 4 + 2];
+//                    new_buff[i * (width * 3) + j + 3] = b;
+//                    new_buff[i * (width * 3 ) + j + 4] = g;
+//                    new_buff[i * (width * 3 ) + j + 5] = r;
+//                    ++k;
+//                }
+//            }
+
+            printf("%ld %ld\n", width, width % 4);
+
+            for(size_t i = 0; i < height; ++i){
+                k = 0;
+                for(size_t j = 0; j < width * 3 + width + width%4; j += 6){
+                    unsigned char b = color_table[(buff[i * (width / 2  + width % 4) + k] >> 4) * 4];
+                    unsigned char g = color_table[(buff[i * (width / 2  + width % 4) + k] >> 4) * 4 + 1];
+                    unsigned char r = color_table[(buff[i * (width / 2  + width % 4) + k] >> 4) * 4 + 2];
+                    new_buff[i * (width * 3) + j] = b;
+                    new_buff[i * (width * 3) + j + 1] = g;
+                    new_buff[i * (width * 3) + j + 2] = r;
+                    b = color_table[(buff[i * (width / 2 + width % 4) + k] & 0xF) * 4];
+                    g = color_table[(buff[i * (width / 2  + width % 4) + k] & 0xF) * 4 + 1];
+                    r = color_table[(buff[i * (width / 2  + width % 4) + k] & 0xF) * 4 + 2];
+                    new_buff[i * (width * 3) + j + 3] = b;
+                    new_buff[i * (width * 3) + j + 4] = g;
+                    new_buff[i * (width * 3) + j + 5] = r;
                     ++k;
                 }
             }
+
+//            for(size_t i = 0; i < height; ++i){
+//                k = 0;
+//                for(size_t j = 0; j < width * 3 + width + 2; j += 6){
+//                    unsigned char b = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4 ) + k] >> 4) * 4];
+//                    unsigned char g = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4) + k] >> 4) * 4 + 1];
+//                    unsigned char r = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4) + k] >> 4) * 4 + 2];
+//                    new_buff[i * (width * 3) + j] = b;
+//                    new_buff[i * (width * 3) + j + 1] = g;
+//                    new_buff[i * (width * 3) + j + 2] = r;
+//                    b = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4) + k] & 0xF) * 4];
+//                    g = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4) + k] & 0xF) * 4 + 1];
+//                    r = color_table[(buff[i * (width / 2  + width % 4 == 0 ? 4 : width % 4) + k] & 0xF) * 4 + 2];
+//                    new_buff[i * (width * 3) + j + 3] = b;
+//                    new_buff[i * (width * 3) + j + 4] = g;
+//                    new_buff[i * (width * 3) + j + 5] = r;
+//                    ++k;
+//                }
+//            }
 
             image = CreateImageFromBuffer(dis, new_buff, width, height);
             break;
@@ -230,6 +268,7 @@ int main(int argc, char *argv[]) {
 
     XMapWindow(dis, win);
     XSelectInput(dis, win, ExposureMask | KeyPressMask);
+
     while (1) {
         XNextEvent(dis, &event);
         if (event.xany.window == win) {
